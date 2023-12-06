@@ -40,3 +40,6 @@ def sign_in_view(request):
 
 def user_view(request):
     return render(request, 'user.html')
+
+def abc_view(request):
+    return 0;

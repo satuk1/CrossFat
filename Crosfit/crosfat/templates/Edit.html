@@ -16,27 +16,15 @@
     <main>
         <nav>
             <a href="{% url 'create' %}">Utworz plan</a>
-            <a href="#moje plany">Moje plany</a>
-            <a href="#Edytuj dane">Edytuj dane</a>
+            <a href="{% url 'Plans' %}">Moje plany</a>
+            <a href="{% url 'Edit' %}">Edytuj dane</a>
         </nav>
 
-    <section class="user-panel">
-        <div class="user-panel-section edit-profile-form">
-            <h2>Edytuj Dane</h2>
-            <form action="/update_profile" method="post">
-                <label for="imie">Imię:</label>
-                <input type="text" id="imie" name="imie" required>
-
-                <label for="nazwisko">Nazwisko:</label>
-                <input type="text" id="nazwisko" name="nazwisko" required>
-
-                <label for="haslo">Nowe Hasło:</label>
-                <input type="password" id="haslo" name="haslo">
-
-                <input type="submit" value="Zapisz Zmiany">
-            </form>
-        </div>
-    </section>
+   <form method="post" action="{% url 'user' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zapisz Zmiany">
+</form>
 
       <footer>
         <p>&copy; 2023 CrosFat</p>

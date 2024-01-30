@@ -20,6 +20,13 @@
             <a href="{% url 'Edit' %}">Edytuj dane</a>
         </nav>
     </main>
+{% block content %}
+    <h2>Profil użytkownika</h2>
+    <p>Nazwa użytkownika: {{ username }}</p>
+    <p>Email: {{ email }}</p>
+    <p>Imię: {{ first_name }}</p>
+    <p>Nazwisko: {{ last_name }}</p>
+{% endblock %}
     <footer>
         <p>&copy; 2023 CrosFat</p>
     </footer>

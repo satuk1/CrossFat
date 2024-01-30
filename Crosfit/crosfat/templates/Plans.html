@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Panel Użytkownika</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
+    <title>Title</title>
 </head>
 <body>
-    <header>
+<header>
         <h1>CrosFat</h1>
         <div class="topnav">
             <a href="{% url 'wyloguj' %}" style="float:right;">Wyloguj</a>
@@ -16,10 +16,13 @@
     <main>
         <nav>
             <a href="{% url 'create' %}">Utworz plan</a>
-            <a href="{% url 'Plans' %}">Moje plany</a>
-            <a href="{% url 'Edit' %}">Edytuj dane</a>
+            <a href="#moje plany">Moje plany</a>
+            <a href="#Edytuj dane">Edytuj dane</a>
         </nav>
     </main>
+    <table>
+        moje plany
+    </table>
     <footer>
         <p>&copy; 2023 CrosFat</p>
     </footer>

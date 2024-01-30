@@ -6,8 +6,7 @@ from .forms import UserLoginForm
 
 def home(request):
     return render(request, "home.html")
-def Utworz(request):
-    return render(request, "User.html")
+
 def wyloguj(request):
     logout(request)
     return redirect('home')
@@ -39,7 +38,12 @@ def sign_in_view(request):
 
 
 def user_view(request):
-    return render(request, 'Utworz.html')
-
+    return render(request, 'Utworz plan.html')
+def create(request):
+    return render(request, "create.html")
+def Plans(request):
+    return render(request, "Plans.html")
+def Edit(request):
+    return render(request, "Edit.html")
 def abc_view(request):
     return 0;

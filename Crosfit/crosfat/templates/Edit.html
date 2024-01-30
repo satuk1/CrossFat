@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
+</head>
+<body>
+<header>
+        <h1>CrosFat</h1>
+        <div class="topnav">
+            <a href="{% url 'wyloguj' %}" style="float:right;">Wyloguj</a>
+        </div>
+    </header>
+    <main>
+        <nav>
+            <a href="{% url 'create' %}">Utworz plan</a>
+            <a href="#moje plany">Moje plany</a>
+            <a href="#Edytuj dane">Edytuj dane</a>
+        </nav>
+
+    <section class="user-panel">
+        <div class="user-panel-section edit-profile-form">
+            <h2>Edytuj Dane</h2>
+            <form action="/update_profile" method="post">
+                <label for="imie">Imię:</label>
+                <input type="text" id="imie" name="imie" required>
+
+                <label for="nazwisko">Nazwisko:</label>
+                <input type="text" id="nazwisko" name="nazwisko" required>
+
+                <label for="haslo">Nowe Hasło:</label>
+                <input type="password" id="haslo" name="haslo">
+
+                <input type="submit" value="Zapisz Zmiany">
+            </form>
+        </div>
+    </section>
+
+      <footer>
+        <p>&copy; 2023 CrosFat</p>
+      </footer>
+</body>
+</html>

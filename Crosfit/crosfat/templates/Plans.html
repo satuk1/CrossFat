@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
+    <title>Title</title>
+</head>
+<body>
+<header>
+        <h1>CrosFat</h1>
+        <div class="topnav">
+            <a href="{% url 'wyloguj' %}" style="float:right;">Wyloguj</a>
+        </div>
+    </header>
+    <main>
+        <nav>
+            <a href="{% url 'create' %}">Utworz plan</a>
+            <a href="{% url 'Plans' %}">Moje plany</a>
+            <a href="{% url 'Edit' %}">Edytuj dane</a>
+        </nav>
+    </main>
+    <table>
+        moje plany
+    </table>
+    <footer>
+        <p>&copy; 2023 CrosFat</p>
+    </footer>
+</body>
+</html>

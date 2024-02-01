@@ -10,14 +10,14 @@
     <header>
         <h1>CrosFat</h1>
         <div class="topnav">
-            <a href="{% url 'wyloguj' %}" style="float:right;">Wyloguj</a>
+            <a href="{% url 'crosfat:wyloguj' %}" style="float:right;">Wyloguj</a>
         </div>
     </header>
     <main>
         <nav>
-            <a href="{% url 'create' %}">Utworz plan</a>
-            <a href="{% url 'Plans' %}">Moje plany</a>
-            <a href="{% url 'Edit' %}">Edytuj dane</a>
+            <a href="{% url 'crosfat:create' %}">Utworz plan</a>
+            <a href="{% url 'crosfat:Plans' %}">Moje plany</a>
+            <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
     </main>
 {% block content %}

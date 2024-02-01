@@ -8,29 +8,29 @@ body, html {
 }
 
 header {
-    background-color: #000; /* Updated to black */
+    background-color: #000;
     color: white;
     text-align: center;
-    padding: 10px 0; /* Updated padding for uniform space */
+    padding: 10px 0;
 }
 
 nav {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 14px 16px; /* Updated padding for links */
+    padding: 14px 16px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    padding: 14px 16px; /* Updated to match example */
-    display: inline-block; /* Added for proper spacing */
+    padding: 14px 16px;
+    display: inline-block;
 }
 
 section, .user-panel, .user-panel-section, .login-form, .register-form {
     padding: 20px;
-    box-sizing: border-box; /* Ensure padding does not affect overall width */
+    box-sizing: border-box;
 }
 
 footer {
@@ -44,16 +44,14 @@ footer {
 }
 
 .topnav, .section-title, .service-list, .service-list li, .signup-link, .login-link, .saved-plan-details {
-    /* Styles for these elements remain consistent with your original CSS,
-       with adjustments made to padding, margins, and alignments where necessary
-       to match the example's layout and aesthetic. */
+
 }
 
-/* Unified form styling */
+
 .login-form, .register-form, .training-form {
     width: 100%;
-    max-width: 600px; /* Ensuring consistency across all forms */
-    margin: 20px auto; /* Centering the form */
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -61,7 +59,7 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input and Select Styles */
+
 input[type="text"], input[type="password"], input[type="submit"], input[type="email"], select {
     width: 100%;
     padding: 10px;
@@ -72,7 +70,7 @@ input[type="text"], input[type="password"], input[type="submit"], input[type="em
     box-sizing: border-box;
 }
 
-/* Submit Button Styles */
+
 input[type="submit"] {
     background-color: #4CAF50; /* Green */
     color: white;
@@ -80,12 +78,12 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
 }
 
 /* Link Styles */
 .signup-link a, .login-link a {
-    color: #007bff; /* Keeping the link color consistent */
+    color: #007bff;
     text-decoration: none;
 }
 

@@ -9,9 +9,9 @@
     <title>CrosFat</title>
 </head>
 <body>
-    <div class="topnav">
-        <a href="{% url 'sign_in' %}">Sign up</a>
-        <a href="{% url 'login' %}">Log in</a>
+    <div class="signup-link">
+        <a href="{% url 'crosfat:sign_in' %}">Sign up</a>
+        <a href="{% url 'crosfat:login' %}">Log in</a>
     </div>
     <header>
         <h1>CrosFat</h1>
@@ -27,7 +27,7 @@
         <h2 class="section-title">Jeśli pragniesz zmienić swoje życie, poprawić swoje zdrowie lub osiągnąć swoje cele sportowe, jesteśmy tutaj, by Ci pomóc! Razem możemy osiągnąć więcej!</h2>
     </section>
     <section id="about">
-        <h2 class="section-title">Nasza Firma: Pomagamy W Osobistym Rozwoju I Zdrowius</h2>
+        <h2 class="section-title">Nasza Firma: Pomagamy W Osobistym Rozwoju I Zdrowiu</h2>
         <p><b>Kim Jesteśmy:</b> Jesteśmy renomowaną firmą specjalizującą się w odchudzaniu oraz wspieraniu osiągnięć sportowych od ponad dwóch dekad. Nasza długoletnia obecność na rynku świadczy o zaufaniu, jakim nas obdarzają nasi klienci.</p>
         <p><b>Nasza Misja:</b> Dążymy do przynoszenia zmian w życiu naszych klientów poprzez dostarczanie spersonalizowanych planów odchudzania oraz programów treningowych dopasowanych do indywidualnych celów.</p>
         <p><b>Odchudzanie:</b> Oferujemy kompleksowe podejście do odchudzania, bazujące na zdrowym stylu życia i naukowych metodach, które są dostosowane do potrzeb każdej osoby. Nasz zespół ekspertów – dietetyków, trenerów osobistych i psychologów - pracuje wspólnie, aby zapewnić wsparcie na każdym etapie podróży ku zdrowszej wersji siebie.</p>
@@ -50,7 +50,7 @@
    <section id="create_plan" style="display: flex; flex-direction: column; align-items: center;">
     <h2 class="section-title">Utwórz plan</h2>
     <p>Przed utworzeniem planu, zaloguj się!</p>
-    <form action="{% url 'login' %}" method="get">
+    <form action="{% url 'crosfat:login' %}" method="get">
         <button type="submit" class="btn btn-primary">Zaloguj się</button>
     </form>
 </section>

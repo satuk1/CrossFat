@@ -87,6 +87,20 @@ input[type="submit"]:hover {
     text-decoration: none;
 }
 
-.signup-link a:hover, .login-link a:hover {
+.login-link a:hover {
     text-decoration: underline;
+}
+.signup-link a {
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 10px;
+    text-decoration: none;
+    float: right;
+}
+
+.signup-link a:hover {
+    background-color: #0056b3;
+    text-decoration: none;
 }

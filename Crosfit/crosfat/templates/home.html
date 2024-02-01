@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="{% url 'sign_in' %}">Sign up</a>
-        <a href="{% url 'login' %}">Log in</a>
+        <a href="{% url 'crosfat:sign_in' %}">Sign up</a>
+        <a href="{% url 'crosfat:login' %}">Log in</a>
     </div>
     <header>
         <h1>CrosFat</h1>
@@ -50,7 +50,7 @@
    <section id="create_plan" style="display: flex; flex-direction: column; align-items: center;">
     <h2 class="section-title">Utwórz plan</h2>
     <p>Przed utworzeniem planu, zaloguj się!</p>
-    <form action="{% url 'login' %}" method="get">
+    <form action="{% url 'crosfat:login' %}" method="get">
         <button type="submit" class="btn btn-primary">Zaloguj się</button>
     </form>
 </section>

@@ -4,25 +4,47 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
-    <title>Title</title>
+    <title>Moje Plany Treningowe</title>
 </head>
 <body>
-<header>
+    <header>
         <h1>CrosFat</h1>
         <div class="topnav">
-            <a href="{% url 'wyloguj' %}" style="float:right;">Wyloguj</a>
+            <a href="{% url 'crosfat:wyloguj' %}" style="float:right;">Wyloguj</a>
         </div>
     </header>
     <main>
         <nav>
-            <a href="{% url 'create' %}">Utworz plan</a>
-            <a href="{% url 'Plans' %}">Moje plany</a>
-            <a href="{% url 'Edit' %}">Edytuj dane</a>
+            <a href="{% url 'crosfat:create' %}">Utwórz plan</a>
+            <a href="{% url 'crosfat:Plans' %}">Moje plany</a>
+            <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
+        <h2>Moje Plany Treningowe</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Waga (kg)</th>
+                    <th>Wzrost (cm)</th>
+                    <th>Cel Treningowy</th>
+                    <!-- Dodatkowe nagłówki jeśli potrzebne -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for plan in plans %}
+                <tr>
+                    <td>{{ plan.waga }}</td>
+                    <td>{{ plan.wzrost }}</td>
+                    <td>{{ plan.cel }}</td>
+                    <!-- Dodatkowe kolumny jeśli potrzebne -->
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Brak planów treningowych.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </main>
-    <table>
-        moje plany
-    </table>
     <footer>
         <p>&copy; 2023 CrosFat</p>
     </footer>

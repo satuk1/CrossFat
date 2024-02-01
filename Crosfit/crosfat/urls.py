@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'crosfat'
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
@@ -9,6 +11,7 @@ urlpatterns = [
     path('wyloguj/', views.wyloguj, name='wyloguj'),
     path('create/', views.create, name='create'),
     path('Plans/', views.Plans, name='Plans'),
-    path('Edit/', views.Edit, name='Edit'),
+    path('Edit/', views.edit_user, name='Edit'),
+    path('submit_training_plan', views.submit_training_plan, name='submit_training_plan'),
 
 ]

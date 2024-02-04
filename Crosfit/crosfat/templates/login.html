@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     {% load static %}
@@ -15,29 +14,7 @@
             {{ form.as_p }}
             <input type="submit" value="Zaloguj">
         </form>
-        <div class="signup-link">
-            Nie masz konta? <a href="{% url 'crosfat:sign_in' %}">Zarejestruj się</a>
-        </div>
-    </div>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
-    <title>Logowanie</title>
-</head>
-<body>
-    <div class="login-form">
-        <h2>Logowanie</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Zaloguj">
-        </form>
-        <div class="signup-link">
+        <div class="signup-link:hover">
             Nie masz konta? <a href="{% url 'crosfat:sign_in' %}">Zarejestruj się</a>
         </div>
     </div>

@@ -1,8 +1,8 @@
-/* style1.css */
-body {
+body, html {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
     background-color: #f4f4f4;
     color: #333;
 }
@@ -10,25 +10,33 @@ body {
 header {
     background-color: #007bff;
     color: white;
-    padding: 10px;
+    padding: 10px 0; /* Zapewniają odpowiednią wysokość nagłówka i wyśrodkowanie pionowe */
     text-align: center;
+}
+header h1 {
+    margin: 0;
 }
 
 nav {
+    display: flex;
+    justify-content: space-around; /* równomiernie rozłoży linki */
+    align-items: center;
     background-color: #333;
+    flex-wrap: wrap; /* pozwoli na przeniesienie linków na nową linię w razie potrzeby */
     color: white;
-    text-align: center;
-    padding: 10px;
+    padding: 10px 0; /* Zaktualizuj padding, jeśli to konieczne */
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    padding: 10px 15px; /* dostosuj padding, aby był odpowiedni dla twojego designu */
+    white-space: nowrap; /* zapobiega łamaniu się tekstu linków */
 }
 
-section {
+section, .user-panel, .user-panel-section, .login-form, .register-form {
     padding: 20px;
+    box-sizing: border-box;
 }
 
 footer {
@@ -41,67 +49,15 @@ footer {
     width: 100%;
 }
 
-.topnav {
-    background-color: #007bff;
-    overflow: hidden;
+.topnav, .section-title, .service-list, .service-list li, .signup-link, .login-link, .saved-plan-details {
+
 }
 
-.topnav a {
-    float: right;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
 
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.section-title {
-    margin-top: 30px;
-    text-align: center;
-    color: #007bff;
-}
-
-.service-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.service-list li {
-    margin-bottom: 10px;
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-.user-panel {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100vh;
-}
-.user-panel-section {
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    width: 30%;
-}
-.user-panel-section h2 {
-    margin-bottom: 15px;
-}
-
-.login-form {
-    width: 300px;
-    margin: 0 auto;
+.login-form, .register-form, .training-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -109,13 +65,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.login-form h2 {
-    text-align: center;
-}
 
-.login-form input[type="text"],
-.login-form input[type="password"],
-.login-form input[type="submit"] {
+input[type="text"], input[type="password"], input[type="submit"], input[type="email"], select {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -125,70 +76,19 @@ body {
     box-sizing: border-box;
 }
 
-.login-form input[type="submit"] {
-    background-color: #007bff;
+
+input[type="submit"] {
+    background-color: #4CAF50; /* Green */
     color: white;
     cursor: pointer;
 }
 
-.login-form input[type="submit"]:hover {
-    background-color: #0056b3;
+input[type="submit"]:hover {
+    background-color: #45a049;
 }
 
-.signup-link {
-    text-align: center;
-}
-
-.signup-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-.signup-link a:hover {
-    text-decoration: underline;
-}
-.register-form {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.register-form h2 {
-    text-align: center;
-}
-
-.register-form input[type="text"],
-.register-form input[type="password"],
-.register-form input[type="email"],
-.register-form input[type="submit"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.register-form input[type="submit"] {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-.register-form input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.login-link {
-    text-align: center;
-}
-
-.login-link a {
+/* Link Styles */
+.signup-link a, .login-link a {
     color: #007bff;
     text-decoration: none;
 }
@@ -196,8 +96,59 @@ body {
 .login-link a:hover {
     text-decoration: underline;
 }
-.saved-plan-details {
-    margin-top: 20px;
-    text-align: center;
+.signup-link a {
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 10px;
+    text-decoration: none;
+    float: right;
+}
 
+.signup-link a:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+.topnav {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.topnav-right {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.topnav-right a {
+    margin-left: 20px; /* Dodaje odstęp między linkami */
+}
+
+.topnav a {
+    margin-left: 20px; /* Dodaje odstęp między linkami */
+}
+
+.topnav a:last-child {
+    margin-left: auto; /* Wypycha ostatni link do prawej strony */
+}
+.form-row {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="number"], select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px; /* Usunięte margin-top */
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%; /* Żeby przycisk rozciągał się na całą szerokość dostępnego miejsca */
+    /* Reszta CSS dla przycisku */
 }

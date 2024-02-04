@@ -2,78 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Utwórz plan treningowy</title>
+    <title>Utworz plan treningowy</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        header {
-            background-color: #000; /* Czarny pasek */
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .training-form {
-            width: 100%; /* Szerokość formularza na całą dostępną szerokość */
-            max-width: 600px; /* Maksymalna szerokość formularza */
-            margin: 20px auto; /* Wycentrowanie formularza */
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        /* Style dla inputów i selectów */
-        input[type=number], select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        /* Style dla przycisku submit */
-        input[type=submit] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 14px 16px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1>Twój Plan Treningowy</h1>
     </header>
     <nav>
-        <a href="{% url 'crosfat:user' %}">Cofnij</a>
+        <a href="{% url 'crosfat:user' %}" style="float:right;">Cofnij</a>
+        <br>
     </nav>
     <section class="user-panel">
-        <div class="training-form">
-            <h2>Twój Plan Treningowy</h2>
-            <form action="{% url 'crosfat:submit_training_plan' %}" method="post">
-                {% csrf_token %}
+    <div class="user-panel-section training-form">
+        <h2>Twój Plan Treningowy</h2>
+        <form action="/submit_training_plan" method="post">
+            <div class="form-row">
                 <label for="waga">Waga (kg):</label>
-                <input type="number" id="waga" name="waga" required><br>
+                <input type="number" id="waga" name="waga" required>
+            </div>
 
+            <div class="form-row">
                 <label for="wzrost">Wzrost (cm):</label>
-                <input type="number" id="wzrost" name="wzrost" required><br>
+                <input type="number" id="wzrost" name="wzrost" required>
+            </div>
 
+            <div class="form-row">
                 <label for="cel">Cel Treningowy:</label>
                 <select id="cel" name="cel" required>
                     <option value="" disabled selected>Wybierz cel</option>
@@ -81,12 +36,15 @@
                     <option value="budowa-masy-miesniowej">Budowa masy mięśniowej</option>
                     <option value="poprawa-wytrzymalosci">Poprawa wytrzymałości</option>
                     <option value="inne">Inne</option>
-                </select><br>
-
+                </select>
+            </div>
+            <div class="form-row">
                 <input type="submit" value="Zapisz Plan">
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
+</section>
+
     <footer>
         <p>&copy; 2024 Twój Plan Treningowy. Wszelkie prawa zastrzeżone.</p>
     </footer>

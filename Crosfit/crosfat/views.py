@@ -47,7 +47,7 @@ def user_view(request):
     email = request.user.email
     first_name = request.user.first_name
     last_name = request.user.last_name
-    return render(request, 'utworz_plan.html',{'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name})
+    return render(request, 'user.html',{'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name})
 def create(request):
     return render(request, "create.html")
 def Plans(request):

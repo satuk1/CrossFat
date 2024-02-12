@@ -94,10 +94,15 @@ def submit_training_plan(request):
         waga = float(request.POST.get('waga'))
         wzrost = float(request.POST.get('wzrost'))
         cel = request.POST.get('cel')
-        plan = PlanTreningowy(user=request.user, waga=waga, wzrost=wzrost, cel=cel)
+        plec = request.POST.get('PLEC')
+        wiek = request.POST.get('wiek')
+        plan = PlanTreningowy(user=request.user, waga=waga, wzrost=wzrost, cel=cel,
+                              plec=plec, wiek=wiek)
+        plan.kcal = plan.oblicz_kcal()
         plan.save()
         messages.success(request, 'Twój plan treningowy został zapisany.')
-        return redirect('crosfat:Plans')
+
+        return redirect('crosfat:plan_details', pk=plan.pk)
     else:
         return render(request, 'create.html')
 

@@ -13,6 +13,10 @@ class PlanTreningowy(models.Model):
     cel = models.CharField(max_length=100)
     data = datetime.now().date()
     bmi = models.DecimalField(max_digits=5, decimal_places=2)
+    PLEC = (
+        ('M', 'Mężczyzna'),
+        ('K', 'Kobieta'),
+    )
 
     def save(self, *args, **kwargs):
         if self.waga > 0 and self.wzrost > 0:

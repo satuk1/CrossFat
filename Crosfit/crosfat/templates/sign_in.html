@@ -12,6 +12,12 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
+            <label for="id_email"> e-mail</label>
+            <input type="text" id="id_email" name="email">
+            <label for="id_first_name">Imię:</label>
+            <input type="text" id="id_first_name" name="first_name">
+            <label for="id_last_name">Nazwisko:</label>
+            <input type="text" id="id_last_name" name="last_name">
             <button type="submit">Zarejestruj</button>
         </form>
         <div class="login-link">

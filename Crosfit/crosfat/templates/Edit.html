@@ -15,16 +15,17 @@
     </header>
     <main>
         <nav>
+            <a href="{% url 'crosfat:user' %}">Moje Dane</a>
             <a href="{% url 'crosfat:create' %}">Utworz plan</a>
             <a href="{% url 'crosfat:Plans' %}">Moje plany</a>
             <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
 
-   <form method="post" action="{% url 'crosfat:user' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Zapisz Zmiany">
-</form>
+ <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
 
       <footer>
         <p>&copy; 2023 CrosFat</p>

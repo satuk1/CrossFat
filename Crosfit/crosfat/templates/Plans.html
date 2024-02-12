@@ -15,14 +15,16 @@
     </header>
     <main>
         <nav>
+            <a href="{% url 'crosfat:user' %}">Moje Dane</a>
             <a href="{% url 'crosfat:create' %}">Utwórz plan</a>
             <a href="{% url 'crosfat:Plans' %}">Moje plany</a>
             <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
-        <h2>Moje Plany Treningowe</h2>
+        <h2>Moj Plany Treningowe</h2>
         <table>
             <thead>
                 <tr>
+                    <th> Data pomiaru </th>
                     <th>Waga (kg)</th>
                     <th>Wzrost (cm)</th>
                     <th>Cel Treningowy</th>
@@ -32,6 +34,7 @@
             <tbody>
                 {% for plan in plans %}
                 <tr>
+                    <td>{{ plan.data }}</td>
                     <td>{{ plan.waga }}</td>
                     <td>{{ plan.wzrost }}</td>
                     <td>{{ plan.cel }}</td>

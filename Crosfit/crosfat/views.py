@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import user
 from .forms import UserLoginForm
-from django.shortcuts import render
-from .forms import EditProfileForm
-from django.http import HttpResponse
 from .models import PlanTreningowy
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import CustomUserChangeForm
 def home(request):
     return render(request, "home.html")
 
@@ -35,7 +32,11 @@ def sign_in_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.first_name = request.POST.get('first_name')
+            user.last_name = request.POST.get('last_name')
+            user.email = request.POST.get('email')
+            user.save()
             return redirect('crosfat:login')
     else:
         form = UserCreationForm()
@@ -57,12 +58,16 @@ def Plans(request):
 
 def edit_user(request):
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            form.save()
-            # Dodaj logikę przekierowania lub wyświetlenia komunikatu o powodzeniu
+            user = form.save()
+            messages.success(request, 'Your password was successfully updated!')
+            update_session_auth_hash(request, user)  # Important to keep the user logged in
+            return redirect('change_user_data')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
-        form = CustomUserChangeForm(instance=request.user)
+        form = PasswordChangeForm(request.user)
 
     return render(request, 'edit.html', {'form': form})
 

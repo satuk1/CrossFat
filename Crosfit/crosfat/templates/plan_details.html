@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>CrosFat</h1>
-        <div class="topnav">
+        <div class="signup-link">
             <a href="{% url 'crosfat:wyloguj' %}" style="float:right;">Wyloguj</a>
         </div>
     </header>
@@ -17,7 +17,7 @@
         <nav>
             <a href="{% url 'crosfat:user' %}">Moje Dane</a>
             <a href="{% url 'crosfat:create' %}">Utwórz plan</a>
-            <a href="{% url 'crosfat:Plans' %}">Moje plany</a>
+            <a href="{% url 'crosfat:lista_planow' %}">Moje plany</a>
             <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
         <h2>Moj Plany Treningowe</h2>
@@ -28,24 +28,18 @@
                     <th>Waga (kg)</th>
                     <th>Wzrost (cm)</th>
                     <th>Cel Treningowy</th>
+                    <th>Aktualne bmi</th>
                     <!-- Dodatkowe nagłówki jeśli potrzebne -->
                 </tr>
             </thead>
-            <tbody>
-                {% for plan in plans %}
-                <tr>
-                    <td>{{ plan.data }}</td>
-                    <td>{{ plan.waga }}</td>
-                    <td>{{ plan.wzrost }}</td>
-                    <td>{{ plan.cel }}</td>
-                    <!-- Dodatkowe kolumny jeśli potrzebne -->
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3">Brak planów treningowych.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
+            <body>
+    <h1>Szczegóły Planu Treningowego</h1>
+    <p>Data pomiaru: {{ plan.data }}</p>
+    <p>Waga (kg): {{ plan.waga }}</p>
+    <p>Wzrost (cm): {{ plan.wzrost }}</p>
+    <p>Cel Treningowy: {{ plan.cel }}</p>
+    <p>Aktualne BMI: {{ plan.bmi }}</p>
+</body>
         </table>
     </main>
     <footer>

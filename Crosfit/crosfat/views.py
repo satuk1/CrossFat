@@ -6,6 +6,8 @@ from .models import PlanTreningowy
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, "home.html")
 
@@ -51,31 +53,35 @@ def user_view(request):
     return render(request, 'user.html',{'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name})
 def create(request):
     return render(request, "create.html")
+
 def Plans(request):
     plans = PlanTreningowy.objects.filter(user=request.user)
-    return render(request, "Plans.html", {'plans': plans})
+    bmi_list = []
+    for plan in plans:
+        wzrost_m = float(plan.wzrost) / 100
+        bmi = float(plan.waga) / (wzrost_m * wzrost_m)
+        bmi_list.append(bmi)
+    return render(request, "plan_details.html", {'plans': plans, 'bmi_list': bmi_list})
 
 
+
+@login_required
 def edit_user(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
+            update_session_auth_hash(request, user)  # Aktualizuje hash sesji
             messages.success(request, 'Your password was successfully updated!')
-            update_session_auth_hash(request, user)  # Important to keep the user logged in
-            return redirect('change_user_data')
-        else:
-            messages.error(request, 'Please correct the error below.')
+            return redirect('crosfat:user')
     else:
-        form = PasswordChangeForm(request.user)
-
-    return render(request, 'edit.html', {'form': form})
+            messages.error(request, 'Please correct the error below.')
+            form = PasswordChangeForm(request.user)
+    return render(request, 'Edit.html', {'form': form})
 
 
 # views.py
-def user_list(request):
-    users = user.objects.all()
-    return render(request, 'user_list.html', {'users': users})
+
 
 def abc_view(request):
     return 0;
@@ -85,8 +91,8 @@ def abc_view(request):
 
 def submit_training_plan(request):
     if request.method == 'POST':
-        waga = request.POST.get('waga')
-        wzrost = request.POST.get('wzrost')
+        waga = float(request.POST.get('waga'))
+        wzrost = float(request.POST.get('wzrost'))
         cel = request.POST.get('cel')
         plan = PlanTreningowy(user=request.user, waga=waga, wzrost=wzrost, cel=cel)
         plan.save()
@@ -94,5 +100,24 @@ def submit_training_plan(request):
         return redirect('crosfat:Plans')
     else:
         return render(request, 'create.html')
+
+
+def lista_planow(request):
+    plany = PlanTreningowy.objects.filter(user=request.user)
+    return render(request, 'lista_planow.html', {'plany': plany})
+
+# views.py
+# views.py
+from django.views.generic import DetailView
+
+
+class PlanDetails(DetailView):
+    model = PlanTreningowy
+    template_name = 'plan_details.html'  # Twój szablon HTML dla szczegółów planu treningowego
+    context_object_name = 'plan'
+
+
+
+
 
 

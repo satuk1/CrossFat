@@ -12,6 +12,13 @@ class PlanTreningowy(models.Model):
     wzrost = models.IntegerField()
     cel = models.CharField(max_length=100)
     data = datetime.now().date()
+    bmi = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        if self.waga > 0 and self.wzrost > 0:
+            wzrost_m = self.wzrost / 100
+            self.bmi = self.waga / (wzrost_m * wzrost_m)
+        super(PlanTreningowy, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"Plan treningowy dla wagi: {self.waga} i wzrostu: {self.wzrost}"

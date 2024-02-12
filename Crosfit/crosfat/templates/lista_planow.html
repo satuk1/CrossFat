@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
     {% load static %}
-   <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
-</head>
-<body>
-<header>
+    <link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Planów Treningowych</title>
+    <header>
         <h1>CrosFat</h1>
         <div class="signup-link">
             <a href="{% url 'crosfat:wyloguj' %}" style="float:right;">Wyloguj</a>
@@ -20,15 +19,18 @@
             <a href="{% url 'crosfat:lista_planow' %}">Moje plany</a>
             <a href="{% url 'crosfat:Edit' %}">Edytuj dane</a>
         </nav>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
-      <footer>
+</head>
+<body>
+     <h1>Lista Planów Treningowych</h1>
+    <ul>
+        {% for plan in plany %}
+                <li><a href="{% url 'crosfat:plan_details' plan.id %}">Plan Treningowy {{ plan.id }}</a></li>
+        {% empty %}
+            Brak Planow
+        {% endfor %}
+        </ul>
+</body>
+ <footer>
         <p>&copy; 2023 CrosFat</p>
       </footer>
-    </main>
-</body>
 </html>

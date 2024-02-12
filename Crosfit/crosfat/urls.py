@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.urls import path
+from .views import PlanDetails
+
 
 app_name = 'crosfat'
 
@@ -13,4 +16,7 @@ urlpatterns = [
     path('Plans/', views.Plans, name='Plans'),
     path('Edit/', views.edit_user, name='Edit'),
     path('submit_training_plan', views.submit_training_plan, name='submit_training_plan'),
+    path('lista_planow/', views.lista_planow, name='lista_planow'),
+    path('Plans/<int:pk>/', PlanDetails.as_view(), name='plan_details'),
+
 ]

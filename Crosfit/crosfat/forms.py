@@ -6,6 +6,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
+# forms.py
+from django import forms
+
+class PlanDetailsForm(forms.Form):
+    plan_id = forms.IntegerField()
 
 
 class UserLoginForm(AuthenticationForm):

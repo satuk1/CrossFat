@@ -6,4 +6,7 @@
 
 2. **Zainstaluj Django**: Możesz zainstalować Django za pomocą narzędzia `pip`, które jest standardowym menedżerem pakietów dla Pythona. Wpisz w terminalu lub wierszu poleceń:
 pip install django
-3.  
+   ```python
+   pip install django
+
+   

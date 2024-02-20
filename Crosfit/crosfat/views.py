@@ -147,13 +147,12 @@ class PlanDetails(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         plan_treningowy = self.object
-        context['cwiczenia'] = PlanCwiczen.objects.filter(plan_treningowy=plan_treningowy)
+        cwiczenia_po_dniach = {}
+        for dzien in range(1, 4):
+            cwiczenia_w_dniu = PlanCwiczen.objects.filter(plan_treningowy=plan_treningowy, dzien=dzien)
+            cwiczenia_po_dniach[dzien] = cwiczenia_w_dniu
+        context['cwiczenia_po_dniach'] = cwiczenia_po_dniach
         return context
-
-
-from django.shortcuts import redirect, get_object_or_404
-from django.contrib import messages
-from .models import PlanTreningowy, PlanCwiczen, cwiczenie_utrata_wagi, cwiczenie_budowa_masy_miesniowej, cwiecznie_poprawa_wytrzymalosc
 
 def zapisz_cwiczenia_do_planu(request, plan_id):
     plan = get_object_or_404(PlanTreningowy, pk=plan_id)

@@ -42,21 +42,24 @@
             <p>Zapotrzebowanie kaloryczne( kcal): {{ plan.kcal }} </p>
 </body>
         </table>
-    {% for day in "123" %}
-        <p>Dzień: {{ day }}</p>
-        {% for cwiczenie in cwiczenia %}
-    <div>
-
-        {% if cwiczenie.cwiczenie_utrata_wagi %}
-            <p>Ćwiczenie (utrata wagi): {{ cwiczenie.cwiczenie_utrata_wagi.nazwa }} - {{ cwiczenie.cwiczenie_utrata_wagi.ilosc_pow }} powtórzeń</p>
-        {% elif cwiczenie.cwiczenie_budowa_masy_miesniowej %}
-            <p>Ćwiczenie (budowa masy): {{ cwiczenie.cwiczenie_budowa_masy_miesniowej.nazwa }} - {{ cwiczenie.cwiczenie_budowa_masy_miesniowej.ilosc_pow }} powtórzeń</p>
-        {% elif cwiczenie.cwiczenie_poprawa_wytrzymalosci %}
-            <p>Ćwiczenie (poprawa wytrzymałości): {{ cwiczenie.cwiczenie_poprawa_wytrzymalosci.nazwa }} - {{ cwiczenie.cwiczenie_poprawa_wytrzymalosci.ilosc_pow }} powtórzeń</p>
-        {% endif %}
-    </div>
+    {% for dzien, cwiczenia_w_dniu in cwiczenia_po_dniach.items %}
+    <h3>Dzień {{ dzien }}:</h3>
+    {% for cwiczenie in cwiczenia_w_dniu %}
+        <div>
+            {% if cwiczenie.cwiczenie_utrata_wagi %}
+                <p>Ćwiczenie (utrata wagi): {{ cwiczenie.cwiczenie_utrata_wagi.nazwa }} - {{ cwiczenie.cwiczenie_utrata_wagi.ilosc_pow }} powtórzeń</p>
+            {% elif cwiczenie.cwiczenie_budowa_masy_miesniowej %}
+                <p>Ćwiczenie (budowa masy): {{ cwiczenie.cwiczenie_budowa_masy_miesniowej.nazwa }} - {{ cwiczenie.cwiczenie_budowa_masy_miesniowej.ilosc_pow }} powtórzeń</p>
+            {% elif cwiczenie.cwiczenie_poprawa_wytrzymalosci %}
+                <p>Ćwiczenie (poprawa wytrzymałości): {{ cwiczenie.cwiczenie_poprawa_wytrzymalosci.nazwa }} - {{ cwiczenie.cwiczenie_poprawa_wytrzymalosci.ilosc_pow }} powtórzeń</p>
+            {% endif %}
+        </div>
+    {% endfor %}
 {% endfor %}
-        {% endfor %}
+
+
+
+
 
                 </table>
     </main>

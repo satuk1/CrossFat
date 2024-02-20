@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserLoginForm
-from .models import PlanTreningowy
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
+from .models import PlanTreningowy, PlanCwiczen, cwiczenie_utrata_wagi, cwiczenie_budowa_masy_miesniowej, cwiecznie_poprawa_wytrzymalosc
+from django.contrib import messages
 def home(request):
     return render(request, "home.html")
 
@@ -23,7 +24,6 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Użytkownik zalogowany, przekieruj go do widoku 'user'
                 return redirect('crosfat:user')
     else:
         form = UserLoginForm()
@@ -102,9 +102,32 @@ def submit_training_plan(request):
         plan.save()
         messages.success(request, 'Twój plan treningowy został zapisany.')
 
-        return redirect('crosfat:plan_details', pk=plan.pk)
+        return redirect('crosfat:Gen_pl', plan_id=plan.pk)
     else:
         return render(request, 'create.html')
+
+def gen_pl(request, plan_id):
+    plan = get_object_or_404(PlanTreningowy, pk=plan_id)
+    if plan.cel == 'utrata-wagi':
+        lista_cwiczen_dzien1 = cwiczenie_utrata_wagi.objects.filter(partia='Nogi')
+        lista_cwiczen_dzien2 = cwiczenie_utrata_wagi.objects.filter(partia='Ramiona')
+        lista_cwiczen_dzien3 = cwiczenie_utrata_wagi.objects.filter(partia__in=['Brzuch', 'Plecy'])
+    elif plan.cel == 'budowa-masy-miesniowej':
+        lista_cwiczen_dzien1 = cwiczenie_budowa_masy_miesniowej.objects.filter(partia='Nogi')
+        lista_cwiczen_dzien2 = cwiczenie_budowa_masy_miesniowej.objects.filter(partia='Ramiona')
+        lista_cwiczen_dzien3 = cwiczenie_budowa_masy_miesniowej.objects.filter(partia__in=['Brzuch', 'Plecy'])
+    elif plan.cel == 'poprawa-wytrzymalosci':
+        lista_cwiczen_dzien1 = cwiecznie_poprawa_wytrzymalosc.objects.filter(partia='Nogi')
+        lista_cwiczen_dzien2 = cwiecznie_poprawa_wytrzymalosc.objects.filter(partia='Ramiona')
+        lista_cwiczen_dzien3 = cwiecznie_poprawa_wytrzymalosc.objects.filter(partia__in=['Brzuch', 'Plecy'])
+    else:
+        lista_cwiczen_dzien1 = []
+        lista_cwiczen_dzien2 = []
+        lista_cwiczen_dzien3 = []
+
+    return render(request, 'gen_pl.html', {'plan': plan, 'lista_cwiczen_dzien1': lista_cwiczen_dzien1,
+        'lista_cwiczen_dzien2': lista_cwiczen_dzien2,
+        'lista_cwiczen_dzien3': lista_cwiczen_dzien3,})
 
 
 def lista_planow(request):
@@ -118,9 +141,49 @@ from django.views.generic import DetailView
 
 class PlanDetails(DetailView):
     model = PlanTreningowy
-    template_name = 'plan_details.html'  # Twój szablon HTML dla szczegółów planu treningowego
+    template_name = 'plan_details.html'
     context_object_name = 'plan'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        plan_treningowy = self.object
+        context['cwiczenia'] = PlanCwiczen.objects.filter(plan_treningowy=plan_treningowy)
+        return context
+
+
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
+from .models import PlanTreningowy, PlanCwiczen, cwiczenie_utrata_wagi, cwiczenie_budowa_masy_miesniowej, cwiecznie_poprawa_wytrzymalosc
+
+def zapisz_cwiczenia_do_planu(request, plan_id):
+    plan = get_object_or_404(PlanTreningowy, pk=plan_id)
+
+    if request.method == 'POST':
+        PlanCwiczen.objects.filter(plan_treningowy=plan).delete()
+
+        for dzien in range(1, 4):
+            cwiczenia_ids = request.POST.getlist(f'cwiczeniaDzien{dzien}')
+            if not cwiczenia_ids:
+                continue
+            for cwiczenie_id in cwiczenia_ids:
+                if not cwiczenie_id:
+                    continue  # Pomijamy puste ID
+
+                # Tworzymy obiekt PlanCwiczen dla każdego wybranego ćwiczenia
+                if plan.cel == 'utrata-wagi':
+                    cwiczenie = get_object_or_404(cwiczenie_utrata_wagi, pk=cwiczenie_id)
+                    PlanCwiczen.objects.create(plan_treningowy=plan, cwiczenie_utrata_wagi=cwiczenie, dzien=dzien)
+                elif plan.cel == 'budowa-masy-miesniowej':
+                    cwiczenie = get_object_or_404(cwiczenie_budowa_masy_miesniowej, pk=cwiczenie_id)
+                    PlanCwiczen.objects.create(plan_treningowy=plan, cwiczenie_budowa_masy_miesniowej=cwiczenie, dzien=dzien)
+                elif plan.cel == 'poprawa-wytrzymalosci':
+                    cwiczenie = get_object_or_404(cwiecznie_poprawa_wytrzymalosc, pk=cwiczenie_id)
+                    PlanCwiczen.objects.create(plan_treningowy=plan, cwiczenie_poprawa_wytrzymalosci=cwiczenie, dzien=dzien)
+
+        messages.success(request, 'Ćwiczenia zostały zapisane.')
+        return redirect('crosfat:plan_details', pk=plan_id)
+
+    return redirect('crosfat:gen_pl', plan_id=plan_id)
 
 
 

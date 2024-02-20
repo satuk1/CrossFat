@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'crosfat/style1.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Generuj Plan Ćwiczeń</title>
+</head>
+<body>
+    <header>
+        <h1>CrosFat</h1>
+    </header>
+    <nav>
+        <a href="{% url 'crosfat:user' %}">Moje Dane</a>
+        <a href="{% url 'crosfat:create' %}">Utwórz Plan</a>
+        <a href="{% url 'crosfat:lista_planow' %}">Moje Plany</a>
+        <a href="{% url 'crosfat:Edit' %}">Edytuj Dane</a>
+    </nav>
+    <main class="login-form">
+        <h2 class="section-title">Utwórz Plan Ćwiczeń dla Celu: {{ plan.get_cel_display }}</h2>
+        <P> Wybierając wiecej niz jedno ćwiczenie na jeden dzień przytrzmaj kalwisz ctrl na klawiaturze</P>
+        <form method="post" action="{% url 'crosfat:zapisz_cwiczenia_do_planu' plan.id %}">
+            {% csrf_token %}
+            <section>
+                <label for="cwiczeniaDzien1">Ćwiczenia - Dzień 1:</label>
+                <select name="cwiczeniaDzien1" id="cwiczeniaDzien1" multiple class="form-control">
+                    {% for cwiczenie in lista_cwiczen_dzien1 %}
+                        <option value="{{ cwiczenie.id }}">{{ cwiczenie.nazwa }} - {{ cwiczenie.ilosc_pow }} powt.</option>
+                    {% endfor %}
+                </select>
+                <button type="button" onclick="dodajCwiczenie('cwiczeniaDzien1', 'listaCwiczenDzien1')" class="btn btn-success">Dodaj do Dnia 1</button>
+            </section>
+            <section>
+                <label for="cwiczeniaDzien2">Ćwiczenia - Dzień 2:</label>
+                <select name="cwiczeniaDzien2" id="cwiczeniaDzien2" multiple class="form-control">
+                    {% for cwiczenie in lista_cwiczen_dzien2 %}
+                        <option value="{{ cwiczenie.id }}">{{ cwiczenie.nazwa }} - {{ cwiczenie.ilosc_pow }} powt.</option>
+                    {% endfor %}
+                </select>
+                <button type="button" onclick="dodajCwiczenie('cwiczeniaDzien2', 'listaCwiczenDzien2')" class="btn btn-success">Dodaj do Dnia 2</button>
+            </section>
+            <section>
+                <label for="cwiczeniaDzien3">Ćwiczenia - Dzień 3:</label>
+                <select name="cwiczeniaDzien3" id="cwiczeniaDzien3" multiple class="form-control">
+                    {% for cwiczenie in lista_cwiczen_dzien3 %}
+                        <option value="{{ cwiczenie.id }}">{{ cwiczenie.nazwa }} - {{ cwiczenie.ilosc_pow }} powt.</option>
+                    {% endfor %}
+                </select>
+                <button type="button" onclick="dodajCwiczenie('cwiczeniaDzien3', 'listaCwiczenDzien3')" class="btn btn-success">Dodaj do Dnia 3</button>
+            </section>
+
+            <h3 class="section-title">Twoje ćwiczenia:</h3>
+            <ul id="listaCwiczenDzien1"><li><h4>Dzień 1:</h4></li></ul>
+            <ul id="listaCwiczenDzien2"><li><h4>Dzień 2:</h4></li></ul>
+            <ul id="listaCwiczenDzien3"><li><h4>Dzień 3:</h4></li></ul>
+
+            <button type="submit">Zapisz Ćwiczenia</button>
+        </form>
+    </main>
+    <br><br><br>
+
+    <footer>
+        <p>&copy; 2023 CrosFat</p>
+    </footer>
+
+    <script>
+function dodajCwiczenie(selectId, listaId) {
+    var select = document.getElementById(selectId);
+    var lista = document.getElementById(listaId);
+    if (lista.getElementsByTagName('li').length + select.selectedOptions.length > 5) {
+        alert("Możesz dodać maksymalnie 4 ćwiczeń do jednego dnia.");
+        return;
+    }
+
+    for (var i = 0; i < select.selectedOptions.length; i++) {
+        if (lista.getElementsByTagName('li').length >= 5) {
+            alert("Możesz dodać maksymalnie 4 ćwiczeń do jednego dnia.");
+            break;
+        }
+        var opcja = select.selectedOptions[i];
+        var li = document.createElement("li");
+        li.textContent = opcja.text;
+        lista.appendChild(li);
+    }
+}
+
+
+    </script>
+</body>
+</html>

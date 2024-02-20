@@ -105,3 +105,12 @@ input[type="submit"]:hover {
     background-color: #0056b3;
     text-decoration: none;
 }
+
+.container {
+            display: flex;
+            justify-content: space-between;
+        }
+.user-details, .plans-table {
+            flex: 1;
+            padding: 10px;
+        }

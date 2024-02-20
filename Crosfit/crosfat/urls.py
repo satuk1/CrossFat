@@ -18,5 +18,6 @@ urlpatterns = [
     path('submit_training_plan', views.submit_training_plan, name='submit_training_plan'),
     path('lista_planow/', views.lista_planow, name='lista_planow'),
     path('Plans/<int:pk>/', PlanDetails.as_view(), name='plan_details'),
-
+    path('gen_pl/<int:plan_id>/', views.gen_pl, name='Gen_pl'),
+    path('zapisz_cwiczenia/<int:plan_id>/', views.zapisz_cwiczenia_do_planu, name='zapisz_cwiczenia_do_planu'),
 ]
